@@ -116,7 +116,7 @@ jobs:
 
       - name: Set Image Org
         run: |
-          [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=openebs || IMAGE_ORG=${{ secrets.IMAGE_ORG }}
+          [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=diws || IMAGE_ORG=${{ secrets.IMAGE_ORG }}
           echo "IMAGE_ORG=${IMAGE_ORG}" >> $GITHUB_ENV
 
       - name: Set Build Date
