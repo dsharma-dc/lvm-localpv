@@ -95,6 +95,8 @@ jobs:
         run: make bootstrap
 
       - name: Running tests
+        env:
+          OPENEBS_NAMESPACE: "openebs"
         run: ./ci/ci-test.sh
 
       - name: Upload Coverage Report
