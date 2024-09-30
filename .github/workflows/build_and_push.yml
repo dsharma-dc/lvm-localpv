@@ -145,7 +145,7 @@ jobs:
 
       - name: Print Tag info
         run: |
-          echo "BRANCH: ${env.BRANCH}"
+          echo "BRANCH: ${{ env.BRANCH }}"
           echo "${{ steps.docker_meta.outputs.tags }}"
 
       - name: Set up QEMU
