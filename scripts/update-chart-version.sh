@@ -139,7 +139,7 @@ update_chart_yaml() {
   yq_ibl ".version = \"$VERSION\" | .appVersion = \"$APP_VERSION\"" "$CHART_YAML"
   yq_ibl ".version = \"$VERSION\"" "$CRD_CHART_YAML"
   yq_ibl "(.dependencies[] | select(.name == \"crds\") | .version) = \"$VERSION\"" "$CHART_YAML"
-  yq_ibl lvmPlugin.image.tag = \"$VERSION\"" "$VALUES_YAML"
+  yq_ibl ".lvmPlugin.image.tag = \"$VERSION\"" "$VALUES_YAML"
 }
 
 set -euo pipefail
@@ -225,3 +225,4 @@ if [[ -z $NO_OP ]]; then
     die "Failed to update the chart versions"
   fi
 fi
+
