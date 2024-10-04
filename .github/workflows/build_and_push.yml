@@ -115,7 +115,7 @@ jobs:
 
       - name: Set Image Org
         run: |
-          [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=openebs || IMAGE_ORG=${{ secrets.IMAGE_ORG }}
+          [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=diws || IMAGE_ORG=${{ secrets.IMAGE_ORG }}
           echo "IMAGE_ORG=${IMAGE_ORG}" >> $GITHUB_ENV
 
       - name: Set Build Date
@@ -134,10 +134,11 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           # add each registry to which the image needs to be pushed here
+          #  quay.io/${{ env.IMAGE_ORG }}/lvm-driver
+          #  ghcr.io/${{ env.IMAGE_ORG }}/lvm-driver
           images: |
             ${{ env.IMAGE_ORG }}/lvm-driver
-            quay.io/${{ env.IMAGE_ORG }}/lvm-driver
-            ghcr.io/${{ env.IMAGE_ORG }}/lvm-driver
+
           tags: |
             type=raw,value=latest,enable=false
             type=raw,value=${{ env.IMAGE_TAG }}
@@ -164,19 +165,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Login to Quay
-        uses: docker/login-action@v3
-        with:
-          registry: quay.io
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_TOKEN }}
+      #- name: Login to Quay
+      #  uses: docker/login-action@v3
+      #  with:
+      #    registry: quay.io
+      #    username: ${{ secrets.QUAY_USERNAME }}
+      #    password: ${{ secrets.QUAY_TOKEN }}
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Login to GHCR
+      #  uses: docker/login-action@v3
+      #  with:
+      #    registry: ghcr.io
+      #    username: ${{ github.actor }}
+      #    password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push Image
         uses: docker/build-push-action@v5
