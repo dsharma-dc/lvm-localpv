@@ -1,7 +1,6 @@
 name: Build and Push
 
 on:
-  create:
   push:
     branches:
       - develop
@@ -34,6 +33,7 @@ jobs:
         run: |
           BRANCH=${{ github.ref_name }}
           ./scripts/validate-chart-version.sh --branch $BRANCH
+
       - name: Run chart-testing lint
         run: |
           ct lint --config ct.yaml
@@ -128,7 +128,7 @@ jobs:
         run: |
           BRANCH=${{ github.ref_name }}
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
-          echo "IMAGE_TAG=$(awk -F': ' '/^version:/ {print $$2}' deploy/helm/charts/Chart.yaml)" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$(awk -F': ' '/^version:/ {print $2}' deploy/helm/charts/Chart.yaml)" >> $GITHUB_ENV
 
       - name: Docker meta
         id: docker_meta

@@ -129,7 +129,7 @@ jobs:
         run: |
           BRANCH=${{ github.ref_name }}
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
-          echo "IMAGE_TAG=$(awk -F': ' '/^version:/ {print $$2}' deploy/helm/charts/Chart.yaml)" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$(awk -F': ' '/^version:/ {print $2}' deploy/helm/charts/Chart.yaml)" >> $GITHUB_ENV
 
       - name: Docker meta
         id: docker_meta
