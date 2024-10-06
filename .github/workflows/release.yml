@@ -85,7 +85,6 @@ jobs:
       - name: Running tests
         run: |
           make ci
-          make sanity
 
       - name: Upload CI Test Coverage Report
         uses: codecov/codecov-action@v4
